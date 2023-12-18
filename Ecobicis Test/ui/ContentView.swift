@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var viewModel = StationViewModel()
+
     var body: some View {
-        Text("Hello, Meldrick")
-            .padding()
+        NavigationView {
+            if viewModel.signedIn {
+                StationListView(viewModel: viewModel)
+            } else {
+                LoginOrSignUpView(viewModel: viewModel)
+            }
+        }
     }
 }
 
