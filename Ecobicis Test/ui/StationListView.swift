@@ -15,13 +15,14 @@ struct StationListView: View {
         
         VStack{
             if let network = viewModel.network {
-                List(network.stations.prefix(50), id: \.id) { station in
+                List(network.stations.prefix(50).indices, id: \.self) { indice in
+                    let station = network.stations[indice]
                     NavigationLink(destination: MapView(station: station, viewModel: viewModel)){
                         HStack {
                             Image(systemName: "bicycle")
                                 .foregroundColor(.primary)
                             VStack(alignment: .leading) {
-                                Text("\(station.name)")
+                                Text("\(indice+1). \(station.name)")
                                     .font(.headline)
                                     .foregroundColor(.primary)
                                 Text("Bicicletas disponibles: \(station.freeBikes)")
